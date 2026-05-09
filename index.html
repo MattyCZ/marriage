@@ -149,13 +149,47 @@
       padding: 0.4rem 1rem;
     }
 
-    .place {
-      font-style: italic;
-      font-weight: 300;
+    .venue {
+      margin-top: 1.75rem;
+    }
+    .venue-label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
       color: var(--slate-blue);
-      margin-top: 1rem;
-      font-size: clamp(1rem, 2.2vw, 1.25rem);
-      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    .venue-name {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--burgundy);
+      font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+      letter-spacing: 0.02em;
+      line-height: 1.15;
+    }
+    .venue-links {
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+    }
+    .venue-links a {
+      color: var(--burnt-orange);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(179, 97, 46, 0.35);
+      padding-bottom: 1px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .venue-links a:hover,
+    .venue-links a:focus-visible {
+      color: var(--burgundy);
+      border-color: var(--burgundy);
+      outline: none;
+    }
+    .venue-links .sep {
+      margin: 0 0.6rem;
+      color: var(--gold);
     }
 
     .divider {
@@ -318,6 +352,16 @@
         <span class="date-side">Říjen</span>
       </div>
 
+      <section class="venue fade-in delay-2" aria-label="Místo konání">
+        <span class="venue-label">Místo</span>
+        <p class="venue-name">Ztracená stodola</p>
+        <p class="venue-links">
+          <a href="https://www.ztracenastodola.cz/" target="_blank" rel="noopener noreferrer">ztracenastodola.cz</a>
+          <span class="sep" aria-hidden="true">·</span>
+          <a href="https://www.google.com/maps?q=49.9735342,16.1863497" target="_blank" rel="noopener noreferrer">mapa</a>
+        </p>
+      </section>
+
       <div class="divider fade-in delay-2" aria-hidden="true">
         <span class="rule"></span>
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13.5 9 L21 9.5 L15 14 L17 21.5 L12 17 L7 21.5 L9 14 L3 9.5 L10.5 9 Z" opacity="0.6"/></svg>
@@ -332,7 +376,7 @@
       </div>
 
       <p class="message fade-in delay-4">
-        Detaily se ještě dolaďují — brzy zde najdete všechno potřebné: místo, program, ubytování i odpovědní formulář. Zatím si rezervujte datum.
+        Detaily se ještě dolaďují — brzy zde najdete program, ubytování i odpovědní formulář. Zatím si rezervujte datum.
       </p>
     </article>
   </main>
