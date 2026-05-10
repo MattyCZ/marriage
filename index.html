@@ -209,6 +209,63 @@
       filter: saturate(0.9);
     }
 
+    .rsvp {
+      margin-top: 2.75rem;
+    }
+    .rsvp-label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--slate-blue);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    .rsvp-title {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--burgundy);
+      font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+      letter-spacing: 0.02em;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+    .rsvp-frame {
+      margin: 0 auto;
+      max-width: 640px;
+      height: clamp(680px, 88vh, 1100px);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(143, 38, 38, 0.18);
+      box-shadow: 0 10px 28px rgba(42, 26, 20, 0.14);
+      background: var(--cream-deep);
+    }
+    .rsvp-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    .rsvp-fallback {
+      margin-top: 0.85rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+    }
+    .rsvp-fallback a {
+      color: var(--burnt-orange);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(179, 97, 46, 0.35);
+      padding-bottom: 1px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .rsvp-fallback a:hover,
+    .rsvp-fallback a:focus-visible {
+      color: var(--burgundy);
+      border-color: var(--burgundy);
+      outline: none;
+    }
+
     .divider {
       display: flex;
       align-items: center;
@@ -229,7 +286,7 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: clamp(0.5rem, 2vw, 1.25rem);
       max-width: 520px;
-      margin: 0 auto;
+      margin: 2rem auto 0;
     }
     .countdown .unit {
       padding: 1rem 0.5rem;
@@ -367,7 +424,20 @@
         <span class="date-num">10 · 10 · 2026</span>
       </div>
 
-      <section class="venue fade-in delay-2" aria-label="Místo konání">
+      <div class="countdown fade-in delay-2" id="countdown" aria-live="polite">
+        <div class="unit"><span class="num" id="cd-d">—</span><span class="label">Dní</span></div>
+        <div class="unit"><span class="num" id="cd-h">—</span><span class="label">Hodin</span></div>
+        <div class="unit"><span class="num" id="cd-m">—</span><span class="label">Minut</span></div>
+        <div class="unit"><span class="num" id="cd-s">—</span><span class="label">Sekund</span></div>
+      </div>
+
+      <div class="divider fade-in delay-2" aria-hidden="true">
+        <span class="rule"></span>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13.5 9 L21 9.5 L15 14 L17 21.5 L12 17 L7 21.5 L9 14 L3 9.5 L10.5 9 Z" opacity="0.6"/></svg>
+        <span class="rule"></span>
+      </div>
+
+      <section class="venue fade-in delay-3" aria-label="Místo konání">
         <span class="venue-label">Místo</span>
         <p class="venue-name">Ztracená stodola</p>
         <p class="venue-links">
@@ -385,21 +455,31 @@
         </div>
       </section>
 
-      <div class="divider fade-in delay-2" aria-hidden="true">
+      <div class="divider fade-in delay-4" aria-hidden="true">
         <span class="rule"></span>
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13.5 9 L21 9.5 L15 14 L17 21.5 L12 17 L7 21.5 L9 14 L3 9.5 L10.5 9 Z" opacity="0.6"/></svg>
         <span class="rule"></span>
       </div>
 
-      <div class="countdown fade-in delay-3" id="countdown" aria-live="polite">
-        <div class="unit"><span class="num" id="cd-d">—</span><span class="label">Dní</span></div>
-        <div class="unit"><span class="num" id="cd-h">—</span><span class="label">Hodin</span></div>
-        <div class="unit"><span class="num" id="cd-m">—</span><span class="label">Minut</span></div>
-        <div class="unit"><span class="num" id="cd-s">—</span><span class="label">Sekund</span></div>
-      </div>
+      <section class="rsvp fade-in delay-4" aria-label="Odpovědní formulář">
+        <span class="rsvp-label">Odpovědní formulář</span>
+        <p class="rsvp-title">Potvrďte nám svou účast</p>
+        <div class="rsvp-frame">
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfOlZFwMx0hf9waGHx43_0wX4ulyW6Ns1bpcDitbPvH83X1iA/viewform?embedded=true"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Odpovědní formulář — svatba Ondry a Verči">
+            Načítám…
+          </iframe>
+        </div>
+        <p class="rsvp-fallback">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfOlZFwMx0hf9waGHx43_0wX4ulyW6Ns1bpcDitbPvH83X1iA/viewform" target="_blank" rel="noopener noreferrer">Otevřít formulář v novém okně</a>
+        </p>
+      </section>
 
       <p class="message fade-in delay-4">
-        Detaily se ještě dolaďují — brzy zde najdete program, ubytování i odpovědní formulář. Zatím si rezervujte datum.
+        Detaily se ještě dolaďují — brzy zde najdete program a další informace.
       </p>
     </article>
   </main>
