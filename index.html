@@ -11,7 +11,7 @@
   <meta name="theme-color" content="#FFEDD7" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Parisienne&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Parisienne&display=swap" rel="stylesheet" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='80' font-size='80'%3E%F0%9F%8D%82%3C/text%3E%3C/svg%3E" />
   <style>
     :root {
@@ -20,6 +20,12 @@
       --burgundy: #8f2626;
       --burgundy-deep: #732020;
       --gold: #a5814c;
+
+      /* dress-code palette (confirmed by the couple) */
+      --dc-red: #8f2626;    /* tmavě červená */
+      --dc-orange: #b3612e; /* oranžová */
+      --dc-beige: #bda879;  /* béžová */
+      --dc-blue: #59769c;   /* modrá */
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,13 +33,26 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: 'EB Garamond', Georgia, serif;
       color: var(--burgundy);
       background: var(--cream);
       min-height: 100vh;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Cormorant Garamond stays the display face for names + headings;
+       running body copy inherits the warmer EB Garamond from body */
+    .eyebrow,
+    .names,
+    .date-info .day,
+    .date-info .time,
+    .date-info .date-big,
+    .venue-line,
+    .section-title,
+    .subhead {
+      font-family: 'Cormorant Garamond', Georgia, serif;
     }
 
     img { display: block; max-width: 100%; height: auto; }
@@ -119,6 +138,12 @@
       text-transform: uppercase;
       color: var(--burgundy);
     }
+    .invite {
+      margin-top: clamp(1.1rem, 3vw, 1.5rem);
+      font-style: italic;
+      font-size: clamp(1.05rem, 2.6vw, 1.25rem);
+      color: var(--gold);
+    }
 
     /* ---------- flourish divider ---------- */
     .divider {
@@ -131,21 +156,35 @@
     .divider img { width: clamp(80px, 22vw, 150px); height: auto; }
     .divider img.flip { transform: scaleX(-1); }
 
-    /* ---------- sections (map + rsvp) ---------- */
+    /* ---------- sections (map + rsvp + content) ---------- */
     .section { text-align: center; }
-    .section-eyebrow {
-      font-family: 'Parisienne', cursive;
-      font-size: clamp(1.5rem, 5vw, 2.1rem);
-      color: var(--gold);
-      line-height: 1;
-      margin-bottom: 0.35rem;
-    }
     .section-title {
       font-weight: 500;
       font-size: clamp(1.7rem, 5vw, 2.5rem);
       line-height: 1.1;
       color: var(--burgundy);
       margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
+    }
+
+    /* body copy shared across content sections */
+    .text {
+      max-width: 560px;
+      margin: 0 auto 1rem;
+      font-size: clamp(1.02rem, 2.4vw, 1.2rem);
+      line-height: 1.55;
+      color: var(--burgundy);
+    }
+    .text:last-child { margin-bottom: 0; }
+    .text a {
+      color: var(--burgundy);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(143, 38, 38, 0.35);
+    }
+    .text a:hover,
+    .text a:focus-visible {
+      color: var(--burgundy-deep);
+      border-color: var(--burgundy-deep);
+      outline: none;
     }
 
     .links {
@@ -169,16 +208,102 @@
     }
     .links .sep { margin: 0 0.6rem; color: var(--gold); }
 
+    /* ---------- harmonogram ---------- */
+    .schedule {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.55rem 1.25rem;
+      max-width: 420px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .schedule dt {
+      font-weight: 600;
+      color: var(--gold);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .schedule dd {
+      margin: 0;
+      color: var(--burgundy);
+      font-size: clamp(1.02rem, 2.4vw, 1.2rem);
+    }
+    .schedule-finale {
+      margin: clamp(1.25rem, 3vw, 1.75rem) auto 0;
+      font-style: italic;
+      font-size: clamp(1.15rem, 3vw, 1.4rem);
+      color: var(--gold);
+    }
+
+    /* ---------- info blocks (Užitečné informace) ---------- */
+    .info { max-width: 640px; margin: 0 auto; }
+    .info-block { margin-top: clamp(1.75rem, 4vw, 2.5rem); }
+    .info-block:first-child { margin-top: 0; }
+    .subhead {
+      font-weight: 600;
+      font-size: clamp(0.88rem, 2.4vw, 1.02rem);
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      margin-bottom: 0.7rem;
+    }
+    .contacts strong { font-weight: 600; }
+
+    /* ---------- dress-code colour swatches (Pantone-style chips) ---------- */
+    .swatches {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: clamp(0.75rem, 2.5vw, 1.25rem);
+      max-width: 480px;
+      margin: clamp(1.1rem, 3vw, 1.5rem) auto 0;
+      padding: 0;
+      list-style: none;
+    }
+    .swatch {
+      width: clamp(64px, 18vw, 82px);
+    }
+    .swatch .chip {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      box-shadow: 0 6px 16px rgba(143, 38, 38, 0.15);
+    }
+    .chip--red { background: var(--dc-red); }
+    .chip--orange { background: var(--dc-orange); }
+    .chip--beige { background: var(--dc-beige); }
+    .chip--blue { background: var(--dc-blue); }
+
+    /* ---------- photo gallery ---------- */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(0.6rem, 2vw, 1rem);
+      max-width: 600px;
+      margin: clamp(1rem, 3vw, 1.5rem) auto 0;
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      border: 1px solid rgba(143, 38, 38, 0.22);
+      box-shadow: 0 12px 30px rgba(143, 38, 38, 0.12);
+    }
+    @media (max-width: 520px) {
+      .gallery { grid-template-columns: 1fr; }
+    }
+
     .frame {
       margin: 0 auto;
-      max-width: 600px;
-      border: 1px solid rgba(143, 38, 38, 0.22);
-      border-radius: 4px;
+      max-width: 560px;
+      border: 1px solid rgba(165, 129, 76, 0.28);
+      border-radius: 6px;
       overflow: hidden;
-      box-shadow: 0 12px 30px rgba(143, 38, 38, 0.12);
-      background: #fff;
+      box-shadow: 0 8px 22px rgba(143, 38, 38, 0.07);
+      background: var(--cream);
     }
-    .frame--map { aspect-ratio: 3 / 2; }
+    .frame--map { max-width: 420px; aspect-ratio: 4 / 3; }
     .frame--rsvp { height: clamp(900px, 90vh, 1000px); }
     .frame iframe { width: 100%; height: 100%; border: 0; display: block; }
     .frame--map iframe { filter: saturate(0.92); }
@@ -194,7 +319,7 @@
 
     footer {
       text-align: center;
-      padding: clamp(0.5rem, 2vw, 1rem) 1rem 2rem;
+      padding: clamp(2.5rem, 6vw, 4rem) 1rem clamp(0.5rem, 2vw, 1rem);
       font-family: 'Parisienne', cursive;
       font-size: clamp(1.4rem, 4vw, 1.9rem);
       color: var(--burgundy);
@@ -235,6 +360,28 @@
         <div class="date-big">10. 10. 2026</div>
         <div class="time">v 11:00 hodin</div>
       </div>
+
+      <p class="invite">Srdečně Vás zveme</p>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <img class="flip" src="assets/flourish.png" width="360" height="150" alt="" />
+      <img src="assets/flourish.png" width="360" height="150" alt="" />
+    </div>
+
+    <!-- Harmonogram -->
+    <section class="section wrap" aria-label="Harmonogram">
+      <h2 class="section-title">Harmonogram</h2>
+      <dl class="schedule">
+        <dt>10:00–10:45</dt><dd>Příjezd hostů</dd>
+        <dt>11:00</dt><dd>Svatební obřad</dd>
+        <dt>13:00</dt><dd>Oběd</dd>
+        <dt>15:00</dt><dd>Krájení dortu</dd>
+        <dt>17:30</dt><dd>Vyplétání kytice</dd>
+        <dt>18:00</dt><dd>Raut</dd>
+        <dt>19:00</dt><dd>První tanec</dd>
+      </dl>
+      <p class="schedule-finale">…a zábava až do rána</p>
     </section>
 
     <div class="divider" aria-hidden="true">
@@ -244,8 +391,8 @@
 
     <!-- Venue + map -->
     <section class="section wrap" aria-label="Místo konání">
-      <p class="section-eyebrow">Místo konání</p>
       <h2 class="section-title">Ztracená stodola</h2>
+      <p class="text">Celý den se odehraje ve Ztracené stodole — od obřadu přes jídlo až po party.</p>
       <p class="links">
         <a href="https://www.ztracenastodola.cz/" target="_blank" rel="noopener noreferrer">ztracenastodola.cz</a>
         <span class="sep" aria-hidden="true">·</span>
@@ -259,6 +406,8 @@
           title="Mapa: Ztracená stodola"
           allowfullscreen></iframe>
       </div>
+      <p class="text" style="margin-top: clamp(1.25rem, 3vw, 1.75rem);">Parkovat můžete přímo v areálu. Při příjezdu uvidíte svatební stodolu po pravé straně — na parkoviště ale zajeďte doleva.</p>
+      <p class="text">Pokud budete potřebovat pomoct s dopravou na místo, dejte nám prosím s předstihem vědět. Zkusíme domluvit spolujízdu, nebo vyzvednutí na nádraží v Chocni.</p>
     </section>
 
     <div class="divider" aria-hidden="true">
@@ -269,6 +418,7 @@
     <!-- RSVP -->
     <section class="section wrap" aria-label="Odpovědní formulář">
       <h2 class="section-title">Potvrďte nám svou účast</h2>
+      <p class="text">Dejte nám prosím vědět, jestli dorazíte, nejpozději do <strong>15. 8. 2026</strong>. Ve formuláři rovnou vyplňte i případné alergie a stravovací omezení.</p>
       <p class="fallback">
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfOlZFwMx0hf9waGHx43_0wX4ulyW6Ns1bpcDitbPvH83X1iA/viewform" target="_blank" rel="noopener noreferrer">Otevřít formulář v novém okně</a>
       </p>
@@ -282,7 +432,84 @@
         </iframe>
       </div>
     </section>
+
+    <div class="divider" aria-hidden="true">
+      <img class="flip" src="assets/flourish.png" width="360" height="150" alt="" />
+      <img src="assets/flourish.png" width="360" height="150" alt="" />
+    </div>
+
+    <!-- Ubytování -->
+    <section class="section wrap" aria-label="Ubytování">
+      <h2 class="section-title">Ubytování</h2>
+      <p class="text">Možnosti přespání jsou různé. V areálu Ztracené stodoly bohužel není dostatek místa pro komfortní přespání všech hostů.</p>
+      <p class="text">Pokud Vám nevadí spát v glampingovém stanu, máme v nabídce cca 20 míst s lůžky a dalších 10 na karimatkách pro větší dobrodruhy. U karimatek prosím počítejte s vlastním spacákem. Přespat se dá i v dodávce, autě, karavanu — zkrátka v čemkoli, co Vás napadne.</p>
+      <p class="text">Alternativně jsme předjednali kapacitu v blízkém penzionu La Casa — v nabídce jsou dvoulůžkové a čtyřlůžkové pokoje. Pokud byste měli zájem, dejte nám prosím vědět co nejdříve. Případně si ubytování můžete zařídit i po vlastní ose.</p>
+
+      <div class="info-block" style="margin-top: clamp(1.5rem, 3.5vw, 2rem);">
+        <p class="subhead">Rozvoz na ubytování</p>
+        <p class="text">Do okolních ubytování (Vysoké Mýto, Choceň) budeme mít zajištěného řidiče. Nic se nerezervuje — řidiče najdete u baru, kdykoli je zrovna na místě, a jede se popořadě, jak kdo dorazí (kdo dřív přijde, ten dřív jede).</p>
+      </div>
+
+      <div class="gallery">
+        <img src="assets/glamping-1.jpg" width="1080" height="1700" loading="lazy" alt="Glampingový zvonový stan na dřevěné terase při západu slunce" />
+        <img src="assets/glamping-2.jpg" width="1080" height="1700" loading="lazy" alt="Interiér glampingového stanu s ustlanou postelí" />
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <img class="flip" src="assets/flourish.png" width="360" height="150" alt="" />
+      <img src="assets/flourish.png" width="360" height="150" alt="" />
+    </div>
+
+    <!-- Užitečné informace -->
+    <section class="section wrap" aria-label="Užitečné informace">
+      <h2 class="section-title">Užitečné informace</h2>
+
+      <div class="info">
+        <div class="info-block contacts">
+          <p class="subhead">Kontakty</p>
+          <p class="text">
+            <strong>Před svatbou:</strong><br />
+            Verča — <a href="tel:+420774985418">774 985 418</a> (i WhatsApp)<br />
+            Ondra — <a href="tel:+420733258804">733 258 804</a>
+          </p>
+          <p class="text"><strong>V den svatby:</strong> bude doplněno nejpozději den před svatbou</p>
+        </div>
+
+        <div class="info-block">
+          <p class="subhead">Dress code</p>
+          <p class="text">Bílá a velmi světlé odstíny jsou tradičně vyhrazené nevěstě. Pokud se budete chtít sladit s tématem svatby, doporučené odstíny jsou tmavě červená, oranžová, béžová a modrá. Rádi ale uvítáme i jiné neutrální barvy.</p>
+          <ul class="swatches" aria-label="Doporučené barvy">
+            <li class="swatch"><span class="chip chip--red"></span></li>
+            <li class="swatch"><span class="chip chip--orange"></span></li>
+            <li class="swatch"><span class="chip chip--beige"></span></li>
+            <li class="swatch"><span class="chip chip--blue"></span></li>
+          </ul>
+        </div>
+
+        <div class="info-block">
+          <p class="subhead">Dary</p>
+          <!-- TODO: pokud chcete na web přidat i QR kód / číslo účtu, doplníme sem -->
+          <p class="text">Nejvíc oceníme, když si s námi náš významný den naplno užijete. Pokud nás chcete obdarovat, na místě budete mít možnost přispět v hotovosti i přes QR kód.</p>
+        </div>
+
+        <div class="info-block">
+          <p class="subhead">Počasí</p>
+          <p class="text">Sledujte prosím předpověď a přejte nám krásný teplý podzimní den. Jde ale o říjnovou svatbu ve stodole, takže je možné, že počasí bude proměnlivé a mokré. Ve stodole má být vytápění, ale pro jistotu si raději vezměte svetr a deštník navíc. Pro děti a dobrodruhy v glampingových stanech to platí dvojnásob.</p>
+        </div>
+
+        <div class="info-block">
+          <p class="subhead">Děti</p>
+          <p class="text">Děti jsou vítané. Prosíme rodiče, aby počítali s nevyzpytatelným počasím. A bude super, když s sebou vezmete i nějaké hračky nebo jinou zábavu.</p>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    Těšíme se na Vás
+    <small>Veronika &amp; Ondřej · 10. 10. 2026</small>
+  </footer>
 
   <!-- bottom flower band (cropped from the printed table card) -->
   <img class="band band--bottom" src="assets/flowers-bottom.png"
