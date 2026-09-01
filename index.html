@@ -145,6 +145,41 @@
       color: var(--gold);
     }
 
+    /* ---------- countdown ---------- */
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(0.5rem, 2vw, 1.1rem);
+      max-width: 520px;
+      margin: clamp(1.75rem, 4vw, 2.5rem) auto 0;
+      padding: 0;
+      list-style: none;
+    }
+    .countdown .unit {
+      padding: clamp(0.7rem, 2vw, 1rem) 0.4rem;
+      border: 1px solid rgba(165, 129, 76, 0.28);
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.32);
+    }
+    .countdown .num {
+      display: block;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 600;
+      font-size: clamp(1.5rem, 5vw, 2.3rem);
+      line-height: 1;
+      color: var(--burgundy);
+      font-variant-numeric: tabular-nums;
+    }
+    .countdown .label {
+      display: block;
+      margin-top: 0.45rem;
+      font-size: clamp(0.62rem, 1.8vw, 0.72rem);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
     /* ---------- flourish divider ---------- */
     .divider {
       display: flex;
@@ -362,6 +397,13 @@
       </div>
 
       <p class="invite">Srdečně Vás zveme</p>
+
+      <ul class="countdown" id="countdown" aria-label="Odpočet do svatby" aria-live="off">
+        <li class="unit"><span class="num" id="cd-d">—</span><span class="label">Dní</span></li>
+        <li class="unit"><span class="num" id="cd-h">—</span><span class="label">Hodin</span></li>
+        <li class="unit"><span class="num" id="cd-m">—</span><span class="label">Minut</span></li>
+        <li class="unit"><span class="num" id="cd-s">—</span><span class="label">Sekund</span></li>
+      </ul>
     </section>
 
     <div class="divider" aria-hidden="true">
@@ -514,5 +556,33 @@
   <!-- bottom flower band (cropped from the printed table card) -->
   <img class="band band--bottom" src="assets/flowers-bottom.png"
        width="2048" height="320" alt="" aria-hidden="true" />
+
+  <script>
+    (function () {
+      var target = new Date('2026-10-10T11:00:00+02:00').getTime();
+      var els = {
+        d: document.getElementById('cd-d'),
+        h: document.getElementById('cd-h'),
+        m: document.getElementById('cd-m'),
+        s: document.getElementById('cd-s')
+      };
+
+      function pad(n) { return String(n).padStart(2, '0'); }
+
+      function tick() {
+        var diff = Math.max(0, target - Date.now());
+        var days = Math.floor(diff / 86400000); diff -= days * 86400000;
+        var hours = Math.floor(diff / 3600000); diff -= hours * 3600000;
+        var mins = Math.floor(diff / 60000); diff -= mins * 60000;
+        els.d.textContent = days;
+        els.h.textContent = pad(hours);
+        els.m.textContent = pad(mins);
+        els.s.textContent = pad(Math.floor(diff / 1000));
+      }
+
+      tick();
+      setInterval(tick, 1000);
+    })();
+  </script>
 </body>
 </html>
