@@ -191,7 +191,7 @@
     .divider img { width: clamp(80px, 22vw, 150px); height: auto; }
     .divider img.flip { transform: scaleX(-1); }
 
-    /* ---------- sections (map + rsvp + content) ---------- */
+    /* ---------- sections (map + content) ---------- */
     .section { text-align: center; }
     .section-title {
       font-weight: 500;
@@ -339,18 +339,8 @@
       background: var(--cream);
     }
     .frame--map { max-width: 420px; aspect-ratio: 4 / 3; }
-    .frame--rsvp { height: clamp(900px, 90vh, 1000px); }
     .frame iframe { width: 100%; height: 100%; border: 0; display: block; }
     .frame--map iframe { filter: saturate(0.92); }
-
-    .fallback { margin: 0 0 1.1rem; font-size: 1.05rem; font-style: italic; }
-    .fallback a {
-      color: var(--burgundy);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(143, 38, 38, 0.35);
-      padding-bottom: 1px;
-    }
-    .fallback a:hover { color: var(--burgundy-deep); border-color: var(--burgundy-deep); }
 
     footer {
       text-align: center;
@@ -450,29 +440,6 @@
       </div>
       <p class="text" style="margin-top: clamp(1.25rem, 3vw, 1.75rem);">Parkovat můžete přímo v areálu. Při příjezdu uvidíte svatební stodolu po pravé straně — na parkoviště ale zajeďte doleva.</p>
       <p class="text">Pokud budete potřebovat pomoct s dopravou na místo, dejte nám prosím s předstihem vědět. Zkusíme domluvit spolujízdu, nebo vyzvednutí na nádraží v Chocni.</p>
-    </section>
-
-    <div class="divider" aria-hidden="true">
-      <img class="flip" src="assets/flourish.png" width="360" height="150" alt="" />
-      <img src="assets/flourish.png" width="360" height="150" alt="" />
-    </div>
-
-    <!-- RSVP -->
-    <section class="section wrap" aria-label="Odpovědní formulář">
-      <h2 class="section-title">Potvrďte nám svou účast</h2>
-      <p class="text">Dejte nám prosím vědět, jestli dorazíte, nejpozději do <strong>15. 8. 2026</strong>. Ve formuláři rovnou vyplňte i případné alergie a stravovací omezení.</p>
-      <p class="fallback">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfOlZFwMx0hf9waGHx43_0wX4ulyW6Ns1bpcDitbPvH83X1iA/viewform" target="_blank" rel="noopener noreferrer">Otevřít formulář v novém okně</a>
-      </p>
-      <div class="frame frame--rsvp">
-        <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLSfOlZFwMx0hf9waGHx43_0wX4ulyW6Ns1bpcDitbPvH83X1iA/viewform?embedded=true"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Odpovědní formulář — svatba Veroniky a Ondřeje">
-          Načítám…
-        </iframe>
-      </div>
     </section>
 
     <div class="divider" aria-hidden="true">
